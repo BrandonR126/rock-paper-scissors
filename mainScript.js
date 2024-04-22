@@ -102,5 +102,4 @@ submitButton.addEventListener('mouseup', function(event) {
     submitButton.style.backgroundColor = "buttonface";
 });
 
-
-asdasdasfasf
+asdasd
