@@ -101,5 +101,3 @@ submitButton.addEventListener('mouseup', function(event) {
     // Change the button style when it's pressed down
     submitButton.style.backgroundColor = "buttonface";
 });
-
-asdasd
