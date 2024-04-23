@@ -5,6 +5,8 @@ const rockButton = document.querySelector("#rock");
 const paperButton = document.querySelector("#paper");
 const scissorsButton = document.querySelector("#scissors");
 const submitButton = document.querySelector("#submit");
+const buttons = document.querySelectorAll('button');
+
 
 // Variables for js
 let computerInput
@@ -16,25 +18,16 @@ let finalWinner
 rockButton.onclick = () => {
     userInput = "rock";
     console.log(userInput + "user input");
-    rockButton.setAttribute("style", "background-color: grey;")
-    paperButton.setAttribute("style", "background-color: buttonface;")
-    scissorsButton.setAttribute("style", "background-color: buttonface;")
 };
 
 paperButton.onclick = () => {
     userInput = "paper";
     console.log(userInput + "user input");
-    rockButton.setAttribute("style", "background-color: buttonface;")
-    paperButton.setAttribute("style", "background-color: grey;")
-    scissorsButton.setAttribute("style", "background-color: buttonface;")
 };
 
 scissorsButton.onclick = () => {
     userInput = "scissors";
     console.log(userInput + "user input");
-    rockButton.setAttribute("style", "background-color: buttonface;")
-    paperButton.setAttribute("style", "background-color: buttonface;")
-    scissorsButton.setAttribute("style", "background-color: grey;")
 };
 
 
@@ -77,16 +70,30 @@ function main(userInput) {
 //Submit button functionality
 submitButton.onclick = () => {
     winnerOutput.textContent = (main(userInput));
-    userInput = "undefined"
-
-    // Change color of buttons
-    rockButton.setAttribute("style", "background-color: buttonface;")
-    paperButton.setAttribute("style", "background-color: buttonface;")
-    scissorsButton.setAttribute("style", "background-color: buttonface;")
-
+    userInput = "undefined";
+    
     console.log(finalWinner)
 };
 
+
+// UI
+
+// Change color of buttons when pressed
+buttons.forEach(button => {
+    button.addEventListener('click', function() {
+        if(button.id !== 'submit') {
+            // Change color of the clicked button
+            this.style.backgroundColor = 'grey';
+    
+            // Change color of other buttons
+            buttons.forEach(otherButton => {
+            if(otherButton !== this) {
+                otherButton.style.backgroundColor = 'buttonface';
+            }
+            });
+        }
+    });
+    });
 
 //Change colors of submit button when pressed
 submitButton.addEventListener('mousedown', function(event) {
@@ -94,6 +101,10 @@ submitButton.addEventListener('mousedown', function(event) {
     submitButton.style.backgroundColor = "grey";
 });
 submitButton.addEventListener('mouseup', function(event) {
-    // Change the button style when it's pressed down
     submitButton.style.backgroundColor = "buttonface";
-});
+    buttons.forEach(button => {
+        if(button !== submitButton) {
+            button.style.backgroundColor = 'buttonface';
+        }
+    });
+})
