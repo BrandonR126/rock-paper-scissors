@@ -8,10 +8,8 @@ const submitButton = document.querySelector("#submit");
 
 // Variables for js
 let computerInput
-let userInput
-let finalWinner = "undefined"
-let endFinal
-let computerGuess
+let userInput = "undefined"
+let finalWinner
 
 
 // Gets the users choice
@@ -41,10 +39,8 @@ scissorsButton.onclick = () => {
 
 
 function main(userInput) {
-
     // Get computers guess
-    computerGuess = Math.floor((Math.random() * 3) + 1);
-    switch(computerGuess) {
+    switch(Math.floor((Math.random() * 3) + 1)) {
     case 1:
         computerInput = "rock";
         break;
@@ -62,14 +58,14 @@ function main(userInput) {
 
     // Finds the winner
     if(userInput == computerInput) {
-        finalWinner = `You both chose ${userInput} .`;
-    } else if(userInput == "rock" & computerInput == "scissors") {
+        finalWinner = `You both chose ${userInput} . You tied.`;
+    } else if(userInput === "rock" && computerInput === "scissors") {
         finalWinner = `You won! You chose ${userInput} and the computer chose ${computerInput} .`;
-    } else if(userInput == "paper" & computerInput == "rock") {
+    } else if(userInput === "paper" && computerInput === "rock") {
         finalWinner = `You won! You chose ${userInput} and the computer chose ${computerInput} .`;
-    } else if(userInput == "scissors" & computerInput == "paper") {
+    } else if(userInput === "scissors" && computerInput === "paper") {
         finalWinner = `You won! You chose ${userInput} and the computer chose ${computerInput} .`;
-    } else if(finalWinner == "undefined" || finalWinner == "Error calculating results. You likely pressed submit without selecting an option, please make sure to select an option.") {
+    } else if(userInput === "undefined" || finalWinner === "Error calculating results. You likely pressed submit without selecting an option, please make sure to select an option.") {
         finalWinner = "Error calculating results. You likely pressed submit without selecting an option, please make sure to select an option.";
     } else {
         finalWinner = `You lost! You chose ${userInput} and the computer chose ${computerInput} .`;
@@ -80,11 +76,14 @@ function main(userInput) {
 
 //Submit button functionality
 submitButton.onclick = () => {
-    endFinal = main(userInput);
-    winnerOutput.textContent = (endFinal);
+    winnerOutput.textContent = (main(userInput));
+    userInput = "undefined"
+
+    // Change color of buttons
     rockButton.setAttribute("style", "background-color: buttonface;")
     paperButton.setAttribute("style", "background-color: buttonface;")
     scissorsButton.setAttribute("style", "background-color: buttonface;")
+
     console.log(finalWinner)
 };
 
